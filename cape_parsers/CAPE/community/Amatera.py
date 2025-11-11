@@ -128,7 +128,7 @@ def is_valid_domain(data):
         if re.fullmatch(DOMAIN_REGEX, data.decode()):
             return True
         return False
-    except:
+    except Exception:
         return False
 
 
@@ -164,7 +164,7 @@ def extract_config(data):
                 decrypted = xor_data(decoded, key_str)
                 if not is_public_ip(decrypted) and not is_valid_domain(decrypted):
                     continue
-        
+
                 config_dict["CNCs"] = [f"https://{decrypted.decode()}"]
 
                 if aes_key:
